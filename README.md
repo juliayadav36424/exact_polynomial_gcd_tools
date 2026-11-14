@@ -23,3 +23,10 @@ Symbolic algebra libraries exist and are excellent, but they bring a dependency 
 ## The awkward edge
 
 The GCD of two non-zero polynomials is returned in monic form (leading coefficient 1). The GCD of two zero polynomials is the zero polynomial itself, which has no leading coefficient to normalise; the function returns `Polynomial([0])` in that case. The degree of the zero polynomial is reported as -1, a convention chosen so the Euclidean loop terminates cleanly.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
